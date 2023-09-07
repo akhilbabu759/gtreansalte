@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:z_translate/core/style_color.dart';
 import 'package:z_translate/page/home/view/widget/common_button.dart';
+import 'package:z_translate/page/home/view/widget/heading_outputcontainer.dart';
+import 'package:z_translate/page/home/view/widget/output_container.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -48,17 +50,15 @@ class Home extends StatelessWidget {
                 Cbutton(tex: 'mal'),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Row(
-                children: [
-                  Text('Translate From',style: TextStyle(color:AppStyle().Kgray ),),Text('(Germani)',style: TextStyle(color: AppStyle().textColor),)
-                ],
-              ),
-            )
+            HeadingOutputContainer(),
+            OutputContainer(),
+            HeadingOutputContainer(),
+            OutputContainer(),
           ],
         ),
       )),
     );
   }
 }
+
+
