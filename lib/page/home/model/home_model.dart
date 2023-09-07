@@ -7,7 +7,8 @@ class LanguageElement {
 
   factory LanguageElement.fromJson(Map<String, dynamic> json) {
     return LanguageElement(
-      language: json['language'],
+      language: json['language']?? '',
     );
   }
 }
+

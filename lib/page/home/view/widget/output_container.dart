@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:z_translate/core/style_color.dart';
+import 'package:z_translate/page/home/controller/home_controller.dart';
 
 class OutputContainer extends StatelessWidget {
   const OutputContainer({
     super.key,
+    // required this.func
+    // ,
+    required this.control
   });
+  // final Function func;
+  final TextEditingController control;
 
   @override
   Widget build(BuildContext context) {
+    final homeC=Get.put(HomeController());
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -20,6 +27,12 @@ class OutputContainer extends StatelessWidget {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              TextFormField(controller:control ,
+                onChanged: (value) {
+                  homeC.detectLaguage(value);
+                  homeC.translateLaguage(value);
+                // func(value);
+              },),
               const Text(''),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

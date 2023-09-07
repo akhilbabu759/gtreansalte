@@ -3,8 +3,9 @@ import 'package:z_translate/core/style_color.dart';
 
 class HeadingOutputContainer extends StatelessWidget {
   const HeadingOutputContainer({
-    super.key,
+    super.key,required this.tex,
   });
+  final String tex;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class HeadingOutputContainer extends StatelessWidget {
             style: TextStyle(color: AppStyle().kgray),
           ),
           Text(
-            '(Germani)',
+            '($tex)',
             style: TextStyle(color: AppStyle().textColor),
           )
         ],

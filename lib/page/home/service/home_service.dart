@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:z_translate/common/api/base_url.dart';
 import 'package:z_translate/common/api/end_url.dart';
@@ -36,7 +37,9 @@ Future<String> detectLanguage(String text) async {
 
 
 Future<List<LanguageElement>> loadLanguages() async {
+  log('api clled');
   String endpoint =BaseUrl().baseurl+EndUrl().getlanguge;
+  log(endpoint);
   final headers = {
     'content-type': 'application/x-www-form-urlencoded',
     'Accept-Encoding': 'application/gzip',
@@ -46,17 +49,27 @@ Future<List<LanguageElement>> loadLanguages() async {
 
   try {
     final response = await Dio().get(endpoint,options: Options(headers:headers ),  );
+    log(response.statusCode.toString());
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> jsonResponse = jsonDecode(response.data);
-      final List<dynamic> languagesJson = jsonResponse['data']['languages'];
+      log(response.data.toString());
+      log(response.data['data'].toString());
+      final Map<String, dynamic> jsonResponses = response.data['data'];
+      log(jsonResponses['languages'].toString(),name: 'opp');
+      final List< dynamic> jsonResponse = jsonResponses['languages'];
+      //  log(jsonResponse.toString(),name: 'aft');
+      // final List<dynamic> languagesJson = jsonResponse['data']['languages'];
+      // log(languagesJson.toString());
       final languages =
-          languagesJson.map((lang) => LanguageElement.fromJson(lang)).toList();
+          jsonResponse.map((lang) => LanguageElement.fromJson(lang!)).toList();
+          log(languages.toString(),name: 'hhi');
       return languages;
     } else {
       throw Exception('Failed to fetch supported languages');
     }
   } catch (e) {
+    
+    log(e.toString(),name: 'xgxcng');
     throw Exception('Failed to fetch supported languages: $e');
   }
 }
