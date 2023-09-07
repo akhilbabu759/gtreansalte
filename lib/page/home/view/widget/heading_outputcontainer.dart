@@ -24,7 +24,7 @@ class HeadingOutputContainer extends StatelessWidget {
               '($tex)',
               style: TextStyle(color: AppStyle().textColor),
             )
-          ],
+          ], 
         );
       },
       ),
