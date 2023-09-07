@@ -27,7 +27,8 @@ class OutputContainer extends StatelessWidget {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextFormField(controller:control ,
+              TextFormField(maxLines: null,
+                controller:control,style: TextStyle(color: AppStyle().textColor) ,decoration: InputDecoration(labelStyle: TextStyle(color: Colors.blue),border: InputBorder.none,),
                 onChanged: (value) {
                   homeC.detectLaguage(value);
                   homeC.translateLaguage(value);

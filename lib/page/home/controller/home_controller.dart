@@ -12,16 +12,37 @@ class HomeController extends GetxController{
     // TODO: implement onInit
     super.onInit();
   }
+  TextEditingController searchControleer=TextEditingController();
   TextEditingController detecteditc=TextEditingController();
   TextEditingController translateeditC=TextEditingController();
-  String detectlanguge='English';
-  String translateto='malayalam';
+  String detectlanguge='en';
+  String translateto='ml';
    String output='';
+  List<LanguageElement>languageListApi=[];
   List<LanguageElement>languageList=[];
+  void detectselectlanguage(String tex){
+    detectlanguge=tex;
+    update();
+
+  }
+  void traslateselectlanguage(String tex){
+    translateto=tex;
+    update();
+
+  }
+  void searchfun(String value){
+    languageList=(value==''?languageListApi: languageList
+          .where((item) => item.language.toLowerCase().contains(value.toLowerCase()))
+          .toList());
+          update();
+    
+
+  }
   void getLaguage()async{
     log('get langu');
-    await HomeService().loadLanguages().then((value) => languageList=value);
+    await HomeService().loadLanguages().then((value) => languageListApi=value);
     update();
+    searchfun('');
   }
 
   void detectLaguage(String tex)async{

@@ -52,38 +52,7 @@ class Home extends StatelessWidget {
                     children: [
                       InkWell(
                           onTap: () {
-                            log("Language List Length: ${homeC.languageList.length}");
-
-                            Get.bottomSheet(Container(
-                              color: const Color.fromARGB(255, 33, 32, 32),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [TextFormField(),
-                                Text('All Languages'),
-                                  Expanded(
-                                    child: ListView.builder(
-                                      itemCount: homeC.languageList.length,
-                                      itemBuilder: (context, index) {
-                                        return Container(
-                                            decoration: BoxDecoration(
-                                                color: AppStyle().kgray,
-                                                borderRadius:
-                                                    BorderRadius.circular(20)),
-                                            height: Get.height * 0.08,
-                                            child: Center(
-                                              child: Text(
-                                                homeC
-                                                    .languageList[index].language,
-                                                style: TextStyle(
-                                                    color: AppStyle().textColor,fontSize: 25),
-                                              ),
-                                            ));
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ));
+                            buttonClick(homeC,1);
                             //
                           },
                           child: Cbutton(tex: homeC.detectlanguge)),
@@ -92,7 +61,10 @@ class Home extends StatelessWidget {
                         size: 30,
                         color: Color.fromARGB(235, 111, 111, 111),
                       ),
-                      Cbutton(tex: homeC.translateto),
+                      InkWell(onTap: () {
+                            buttonClick(homeC,2);
+                            //
+                          },child: Cbutton(tex: homeC.translateto)),
                     ],
                   );
                 },
@@ -106,5 +78,68 @@ class Home extends StatelessWidget {
         ),
       )),
     );
+  }
+
+  void buttonClick(HomeController homeC,int check) {
+    
+    log("Language List Length: ${homeC.languageList.length}");
+    
+    Get.bottomSheet(Container(
+      color: const Color.fromARGB(255, 33, 32, 32),
+      child: GetBuilder<HomeController>(builder: (controller) {
+        return Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [SizedBox(height: 10,),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(onChanged: (value) {
+                homeC.searchfun(value);
+                
+              },
+                  decoration: InputDecoration(prefixIcon:Icon(Icons.search, color: AppStyle().textColor,size: 27) ,
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(20),
+                          borderSide: BorderSide(strokeAlign: 2,
+                              color: Color.fromARGB(255, 229, 226, 226))))),
+            ),
+            Text('All Languages',style: TextStyle(color: AppStyle().kgray),),
+            Expanded(
+              child: ListView.builder(
+                itemCount: homeC.languageList.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GestureDetector(onTap: () {
+                     check==1?homeC.detectselectlanguage(homeC.languageList[index].language): homeC.traslateselectlanguage(homeC.languageList[index].language);
+                     Get.back();
+                    },
+                      child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius:
+                                  BorderRadius.circular(
+                                      20)),
+                          height: Get.height * 0.08,
+                          child: Center(
+                            child: Text(
+                              homeC.languageList[index]
+                                  .language,
+                              style: TextStyle(
+                                  color:
+                                      AppStyle().textColor,
+                                  fontSize: 25),
+                            ),
+                          )),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      },
+      ),
+    ));
   }
 }
