@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:z_translate/core/style_color.dart';
 import 'package:z_translate/page/home/view/widget/common_button.dart';
 import 'package:z_translate/page/home/view/widget/heading_outputcontainer.dart';
@@ -17,7 +17,7 @@ class Home extends StatelessWidget {
         padding: const EdgeInsets.all(18.0),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -28,17 +28,17 @@ class Home extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Divider(
               color: AppStyle().kDividerColor,
               thickness: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Cbutton(tex: 'eng'),
@@ -50,10 +50,10 @@ class Home extends StatelessWidget {
                 Cbutton(tex: 'mal'),
               ],
             ),
-            HeadingOutputContainer(),
-            OutputContainer(),
-            HeadingOutputContainer(),
-            OutputContainer(),
+            const HeadingOutputContainer(),
+            const OutputContainer(),
+            const HeadingOutputContainer(),
+            const OutputContainer(),
           ],
         ),
       )),

@@ -14,7 +14,7 @@ class HeadingOutputContainer extends StatelessWidget {
         children: [
           Text(
             'Translate From',
-            style: TextStyle(color: AppStyle().Kgray),
+            style: TextStyle(color: AppStyle().kgray),
           ),
           Text(
             '(Germani)',
